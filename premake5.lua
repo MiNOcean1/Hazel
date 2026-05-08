@@ -8,6 +8,14 @@ workspace "Hazel"
 		"Dist"
 	}
 outputdir="%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+--相对于根文件夹（解决方案目录）的包含目录
+IncludeDir = {}
+IncludeDir["GLFW"]="Hazel/vendor/GLFW/include"
+
+include "Hazel/vendor/GLFW"
+
+
 project "Hazel"
 	location "Hazel"
 	kind "SharedLib"
@@ -15,6 +23,9 @@ project "Hazel"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "hzpch.h"
+    pchsource "Hazel/src/hzpch.cpp"
 
 	files
 	{
@@ -25,14 +36,21 @@ project "Hazel"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
 	}
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
+    }
 
 	filter "system:windows"
 		cppdialect "c++17"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
-
+        buildoptions { "/utf-8" }
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
@@ -81,8 +99,9 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "c++17"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
+        buildoptions { "/utf-8" }
 
 		defines
 		{

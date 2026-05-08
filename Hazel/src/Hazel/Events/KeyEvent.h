@@ -2,8 +2,6 @@
 //处理响应键盘事件
 #include "Event.h"
 
-#include <sstream>
-
 namespace Hazel {
 
     class HAZEL_API KeyEvent : public Event

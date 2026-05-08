@@ -1,7 +1,8 @@
 #pragma once
+
+#include "hzpch.h"
 #include "Hazel/Core.h"
-#include <string>
-#include <functional>
+
 namespace Hazel{
     //事件类型
     enum class EventType
@@ -54,11 +55,13 @@ namespace Hazel{
         template<typename T>
         using EventFn = std::function<bool(T&)>;
     public:
+        //构造函数
         EventDispatcher(Event& event)
             : m_Event(event)
         {
-        }//func把函数表示为变量
-// 2. 类型强转 + 调用处理函数
+        }
+        //func把函数表示为变量
+        // 2. 类型强转 + 调用处理函数
                 //函数返回 true = 事件被拦截 / 吃掉，不再往下传递
                 //返回 false = 事件继续传递给其他系统
             // 1. 类型匹配检查

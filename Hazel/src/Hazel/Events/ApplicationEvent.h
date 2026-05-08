@@ -2,7 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
 
 namespace Hazel {
     //窗口大小变化事件
