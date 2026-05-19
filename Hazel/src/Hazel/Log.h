@@ -15,10 +15,15 @@ namespace Hazel {
 	};
 }
 //引擎内部宏
+//输出非常琐碎的信息（初始化、函数调用、流程）
 #define HZ_CORE_TRACE(...) ::Hazel::Log::GetCoreLogger()->trace(__VA_ARGS__)
+//输出正常运行的提示（窗口创建成功、引擎启动）
 #define HZ_CORE_INFO(...) ::Hazel::Log::GetCoreLogger()->info(__VA_ARGS__)
+//不影响运行，但需要注意的问题
 #define HZ_CORE_WARN(...) ::Hazel::Log::GetCoreLogger()->warn(__VA_ARGS__)
+//出问题了，但程序还能跑
 #define HZ_CORE_ERROR(...) ::Hazel::Log::GetCoreLogger()->error(__VA_ARGS__)
+//程序直接崩溃、无法继续运行
 #define HZ_CORE_FATAL(...) ::Hazel::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
 

@@ -33,7 +33,7 @@ namespace Hazel{
 
     class HAZEL_API Event
     {
-        friend class EventDispatcher;//在一个类中指明其他的类（或者）函数能够直接访问该类中的private和protected成员。
+       // friend class EventDispatcher;//在一个类中指明其他的类（或者）函数能够直接访问该类中的private和protected成员。
     public:
         virtual EventType GetEventType() const = 0;//虚函数写了个接口，具体由子类实现
         virtual const char* GetName() const = 0;
@@ -44,8 +44,9 @@ namespace Hazel{
         {
             return GetCategoryFlags() & category;
         }
-    protected:
-        bool m_Handled = false;
+        bool Handled = false;
+    //protected:
+    //    bool m_Handled = false;
     };
     //事件调度器
     class EventDispatcher
