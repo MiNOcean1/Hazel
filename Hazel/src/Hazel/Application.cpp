@@ -4,7 +4,7 @@
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 namespace Hazel {
 
@@ -17,6 +17,7 @@ namespace Hazel {
         //this：把这个成员函数绑定到“当前这个 Application 实例”
         //std::placeholders::_1：表示“回调被调用时传进来的第 1 个参数”，会被转发给 OnEvent
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
 	}
 
 	Application::~Application()

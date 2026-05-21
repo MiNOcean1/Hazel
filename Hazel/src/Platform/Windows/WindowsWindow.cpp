@@ -5,6 +5,9 @@
 #include "Hazel/Events/MouseEvent.h"
 #include "Hazel/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 namespace Hazel {
 
     static bool s_GLFWInitialized = false;
@@ -52,6 +55,10 @@ namespace Hazel {
         //把这个窗口的上下文设置为当前线程正在使用的上下文
         //没有 context，OpenGL 函数不知道该改哪份状态、把东西画到哪里。
         glfwMakeContextCurrent(m_Window);
+        //初始化Glad
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        HZ_CORE_ASSERT(status,"Failed to initialize Glad!");
+
         //给 GLFW 窗口绑一个“用户指针”，这里绑的是 m_Data 的地址。
         //常用于在 GLFW 的回调函数里，通过 glfwGetWindowUserPointer(window) 取回引擎自己的数据（例如事件系统 / 回调）。
         glfwSetWindowUserPointer(m_Window, &m_Data);
